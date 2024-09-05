@@ -2,6 +2,8 @@ import { useContext } from "react";
 import Countries from "./components/Countries";
 import Header from "./components/Header";
 import { CountryContext } from "./context/CountryContext";
+import { Route, Routes } from "react-router-dom";
+import BorderCountries from "./components/BorderCountries";
 
 
 function App() {
@@ -9,13 +11,15 @@ function App() {
   if (loading) {
     return <div>Loading...</div>
   }
-  console.log( countries[0]);
-  
+
   
   return (
     <>
-        <Header/>
-        <Countries/>
+    <Header/>
+    <Routes>
+      <Route path="/" element={<Countries />} />
+      <Route path="/:slug" element={<BorderCountries />} />
+    </Routes>
     </>
   );
 }
