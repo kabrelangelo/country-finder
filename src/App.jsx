@@ -1,21 +1,29 @@
 import { useContext } from "react";
 import Countries from "./components/Countries";
-import Header from "./components/Header";
 import { CountryContext } from "./context/CountryContext";
-import { Route, Routes } from "react-router-dom";
 import DetailsCountries from "./components/DetailsCountries";
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+
 
 
 function App() {
-  const {loading, countries}=useContext(CountryContext)
+  const {loading}=useContext(CountryContext)
   if (loading) {
-    return <div>Loading...</div>
+    return (<div>
+            <span className="loading loading-spinner text-primary"></span>
+            <span className="loading loading-spinner text-secondary"></span>
+            <span className="loading loading-spinner text-accent"></span>
+            <span className="loading loading-spinner text-neutral"></span>
+            <span className="loading loading-spinner text-info"></span>
+            <span className="loading loading-spinner text-success"></span>
+            <span className="loading loading-spinner text-warning"></span>
+            <span className="loading loading-spinner text-error"></span>
+    </div>)
   }
-
-  
   return (
     <>
-    <Header/>
+    <Navbar/>
     <Routes>
       <Route path="/" element={<Countries />} />
       <Route path="/:slug" element={<DetailsCountries />} />

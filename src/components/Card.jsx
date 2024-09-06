@@ -1,16 +1,10 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { CountryContext } from '../context/CountryContext';
-import {Link} from 'react-router-dom' 
 
-const Card = () => {
-const {countries}=useContext(CountryContext)
-
+const Card = ({country, index}) => {
     return (
-        <>
-
-        { countries.map((country, index)=>(
-           
-            <div key={index} className="bg-white p-6 rounded-lg 
+        <div key={index} className="bg-white p-6 rounded-lg 
            transition-transform duration-500 transform hover:scale-105 cursor-pointer
            opacity-0 animate-fadeIn shadow-md">
             <Link to={`/${encodeURIComponent(country.name.common)}`} >
@@ -25,10 +19,7 @@ const {countries}=useContext(CountryContext)
 </h5>
 </Link>
         </div>
-    
-       )) } 
-        
-        </>
+
     );
 };
 

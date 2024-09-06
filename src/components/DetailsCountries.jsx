@@ -1,21 +1,28 @@
 import React, { useContext } from 'react';
 import { CountryContext } from '../context/CountryContext';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+
 
 const DetailsCountries = () => {
   const { countries, loading } = useContext(CountryContext);
   const { slug } = useParams();
-  
+  const navigate=useNavigate()
   const country = countries.find(c => c.name.common === decodeURIComponent(slug));
   const borders = country.borders;
 
-  const bordersCca3 = borders.map(border => countries.find(obj => obj.cca3 === border));
+  const bordersCca3 = borders? borders.map(border => countries.find(obj => obj.cca3 === border)):[];
   const bordersCountries = bordersCca3.map(border => border?.name?.common);
 
   return (
+    <>
+    <div className="mt-8 mx-10">
+          <div className="flex flex-wrap gap-4 mt-4">
+          <button onClick={()=>navigate(-1)} className='px-10 py-5 bg-gray-100 rounded-md shadow-lg font-bold  
+          hover:bg-gray-400 transition'>&#8592;Back</button>
+      </div>
+      </div>
     <div className="container mx-auto px-4 py-8">
-  <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-    
+  <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4"> 
     <div className="lg:col-span-2">
       <img src={country.flags.svg} alt={`${country.name.common} flag`} className="w-full h-auto rounded-lg shadow-lg" />
     </div>
@@ -61,11 +68,7 @@ const DetailsCountries = () => {
       </div>
     </div>
     
-  </div>
-
-
-
-    
+  </div>    
       {bordersCountries.length > 0 && (
         <div className="mt-8">
           <h3 className="text-xl font-bold">Border Countries:</h3>
@@ -79,6 +82,7 @@ const DetailsCountries = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 
