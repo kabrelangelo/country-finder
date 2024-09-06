@@ -3,7 +3,7 @@ import Countries from "./components/Countries";
 import Header from "./components/Header";
 import { CountryContext } from "./context/CountryContext";
 import { Route, Routes } from "react-router-dom";
-import BorderCountries from "./components/BorderCountries";
+import DetailsCountries from "./components/DetailsCountries";
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
     <Header/>
     <Routes>
       <Route path="/" element={<Countries />} />
-      <Route path="/:slug" element={<BorderCountries />} />
+      <Route path="/:slug" element={<DetailsCountries />} />
     </Routes>
     </>
   );
